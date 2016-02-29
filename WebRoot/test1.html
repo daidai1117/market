@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jqGrid 实例</title>
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+    <link href="css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/jqgrid/ui.jqgrid.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=2.2.0" rel="stylesheet">
+    
+        <script src="js/bootstrap.min.js?v=3.4.0"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Peity -->
+    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+
+    <!-- jqGrid -->
+    <script src="js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
+    <script src="js/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/hplus.js?v=2.2.0"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+
+    <script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+		  pageInit();
+		});
+		function pageInit(){
+		  jQuery("#editgrid").jqGrid(
+		      {
+		        url : 'test.do',
+		        datatype : "json",
+		        colNames : [ 'Inv No', 'Date', 'Client', 'Amount', 'Tax','Total', 'Closed', 'Ship via', 'Notes' ],
+		        colModel : [
+		                    {name : 'id',index : 'id',width : 150,editable : false,editoptions : {readonly : true,size : 10}}, 
+		                    {name : 'invdate',index : 'invdate',width : 150,editable : true,editoptions : {size : 10}}, 
+		                    {name : 'name',index : 'name',width : 150,editable : true,editoptions : {size : 25}}, 
+		                    {name : 'amount',index : 'amount',width : 150,align : "right",editable : true,editoptions : {size : 10}}, 
+		                    {name : 'tax',index : 'tax',width : 150,align : "right",editable : true,editoptions : {size : 10}}, 
+		                    {name : 'total',index : 'total',width : 150,align : "right",editable : true,editoptions : {size : 10}}, 
+		                    {name : 'closed',index : 'closed',width : 150,align : 'center',editable : true,edittype : "checkbox",editoptions : {value : "Yes:No"}}, 
+		                    {name : 'ship_via',index : 'ship_via',width : 150,editable : true,edittype : "select",editoptions : {value : "FE:FedEx;TN:TNT"}}, 
+		                    {name : 'note',index : 'note',width : 150,sortable : false,editable : true,edittype : "textarea",editoptions : {rows : "2",cols : "20"}} 
+		                  ],
+		        rowNum : 10,
+		        rowList : [ 10, 20, 30,100 ],
+		        pager : '#pagered',
+		        sortname : 'id',
+		        viewrecords : true,
+		        sortorder : "desc",
+		        caption : "Search Example"
+		        /* editurl : "RowEditing.do" */
+		      });
+		  $("#bedata").click(function() {
+		    jQuery("#editgrid").jqGrid('editGridRow', "new", {
+		      height : 600,
+		      reloadAfterSubmit : true
+		    });
+		  });
+		}
+	</script>
+</head>
+<body>
+	<table id="editgrid"></table>
+    <div id="pagered"></div>
+    <input type="BUTTON" id="bedata" value="add" />
+</body>
+</html>
